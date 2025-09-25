@@ -32,6 +32,18 @@ const ProjectSection = () => {
           slidesToShow: 1,
         },
       },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 340,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
     ],
   };
 
