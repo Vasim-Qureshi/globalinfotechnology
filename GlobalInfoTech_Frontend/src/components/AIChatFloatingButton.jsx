@@ -50,7 +50,7 @@ const AIChatFloatingButton = ({ handleAIQuery = null, autoOpen = false, persistK
   }, [messages, open]);
 
   function pushMessage(role, text, opts = {}) {
-    const id = `${Date.now()}-${Math.random().toString(36).slice(2,7)}`;
+    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
     const msg = { id, role, text, ...opts };
     setMessages((m) => [...m, msg]);
     return id;
@@ -92,7 +92,10 @@ const AIChatFloatingButton = ({ handleAIQuery = null, autoOpen = false, persistK
         });
       } else {
         // simple non-streaming fallback: POST to /api/ai expecting { reply }
-        const res = await fetch('http://localhost:5000/api/ai-stream', {
+
+        const res = await fetch('https://globalinfotechnology-backend.vercel.app/api/ai-stream', {
+          // const res = await fetch('https://globalinfotechnology-backend.vercel.app/api/ai-stream', {
+
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text, history: messages }),
@@ -159,7 +162,7 @@ const AIChatFloatingButton = ({ handleAIQuery = null, autoOpen = false, persistK
 
               {messages.map((m) => (
                 <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`${m.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-800'} px-3 py-2 rounded-2xl text-sm max-w-[75%] whitespace-pre-wrap`}> 
+                  <div className={`${m.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-800'} px-3 py-2 rounded-2xl text-sm max-w-[75%] whitespace-pre-wrap`}>
                     {m.text}
                     {m.streaming && <span className="text-xs text-gray-400 ml-2">▌</span>}
                   </div>

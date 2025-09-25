@@ -1,7 +1,9 @@
 // client-stream-handler.js
 export async function handleAIQueryStreaming(userMessage, { onToken } = {}) {
   // POST to our backend stream endpoint
-  const resp = await fetch("http://localhost:5000/api/ai-stream", {
+
+  const resp = await fetch("https://globalinfotechnology-backend.vercel.app/api/ai-stream", {
+    // const resp = await fetch("http://localhost:5000/api/ai-stream", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message: userMessage }),
