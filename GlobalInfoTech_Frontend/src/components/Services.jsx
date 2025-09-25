@@ -78,14 +78,18 @@ const Services = () => {
     responsive: [
       {
         breakpoint: 1280, // large screens
-        settings: { slidesToShow: 3 },
+        settings: { slidesToShow: 4 },
       },
       {
         breakpoint: 1024, // tablets landscape
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 3 },
       },
       {
         breakpoint: 640, // mobile
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 340, // mobile
         settings: { slidesToShow: 1 },
       },
     ],
