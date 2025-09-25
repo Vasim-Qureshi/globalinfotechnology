@@ -1,6 +1,5 @@
 // File: Services.jsx
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,6 +9,19 @@ import service2 from "../assets/wordpress.png";
 import service3 from "../assets/Shopify.jpg";
 
 const Services = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Track window resize and update key
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    // trigger once on load (fixes mobile first render issue)
+    setTimeout(() => window.dispatchEvent(new Event("resize")), 50);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const services = [
     {
       id: 1,
@@ -70,7 +82,7 @@ const Services = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 800,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
@@ -78,30 +90,19 @@ const Services = () => {
     pauseOnHover: true,
     responsive: [
       {
-        breakpoint: 1280, // large screens
-        settings: { slidesToShow: 4 },
+        breakpoint: 1280, // xl screens
+        settings: { slidesToShow: 3 },
       },
       {
-        breakpoint: 1024, // tablets landscape
-        settings: { slidesToShow: 3 },
+        breakpoint: 1024, // tablets
+        settings: { slidesToShow: 2 },
       },
       {
         breakpoint: 640, // mobile
         settings: { slidesToShow: 1 },
       },
-      {
-        breakpoint: 340, // mobile
-        settings: { slidesToShow: 1 },
-      },
     ],
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-    }, 100);
-  }, []);
-
 
   return (
     <section className="bg-white py-16" id="services">
@@ -117,8 +118,8 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Slider */}
-        <Slider {...settings}>
+        {/* Slider (force re-render with key) */}
+        <Slider {...settings} key={windowWidth}>
           {services.map((s) => (
             <div key={s.id} className="px-3">
               <article className="flex flex-col bg-white rounded-xl shadow-md hover:shadow-lg transition p-5 h-full">
