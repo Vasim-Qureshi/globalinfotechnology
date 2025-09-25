@@ -86,7 +86,7 @@ const Services = () => {
       },
       {
         breakpoint: 640, // mobile
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 1 },
       },
       {
         breakpoint: 340, // mobile
