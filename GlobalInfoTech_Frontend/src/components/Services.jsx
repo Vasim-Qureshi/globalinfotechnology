@@ -1,5 +1,6 @@
 // File: Services.jsx
 import React from "react";
+import { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -94,6 +95,13 @@ const Services = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 100);
+  }, []);
+
 
   return (
     <section className="bg-white py-16" id="services">

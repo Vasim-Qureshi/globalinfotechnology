@@ -74,6 +74,12 @@ const ProjectSection = () => {
       desc: "Vehicle Selling Platform with Search and Filters.",
     },
   ];
+  useEffect(() => {
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 100);
+  }, []);
+
 
   return (
     <section className="py-20 bg-white">
