@@ -1,27 +1,11 @@
 // File: Services.jsx
-import React, { useState, useEffect } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React, { useState } from "react";
 
 import service1 from "../assets/coding.jpg";
 import service2 from "../assets/wordpress.png";
 import service3 from "../assets/Shopify.jpg";
 
 const Services = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // Track window resize and update key
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-
-    // trigger once on load (fixes mobile first render issue)
-    setTimeout(() => window.dispatchEvent(new Event("resize")), 50);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const services = [
     {
       id: 1,
@@ -79,34 +63,12 @@ const Services = () => {
     },
   ];
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1280, // xl screens
-        settings: { slidesToShow: 4 },
-      },
-      {
-        breakpoint: 1024, // tablets
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 768, // mobile
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 340, // mobile
-        settings: { slidesToShow: 1 },
-      },
-    ],
-  };
+  const [current, setCurrent] = useState(0);
+
+  const nextSlide = () =>
+    setCurrent((prev) => (prev === services.length - 1 ? 0 : prev + 1));
+  const prevSlide = () =>
+    setCurrent((prev) => (prev === 0 ? services.length - 1 : prev - 1));
 
   return (
     <section className="bg-white py-16" id="services">
@@ -122,40 +84,74 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Slider (force re-render with key) */}
-        <Slider {...settings} key={windowWidth}>
-          {services.map((s) => (
-            <div key={s.id} className="px-3">
-              <article className="flex flex-col bg-white rounded-xl shadow-md hover:shadow-lg transition p-5 h-full">
-                {/* Image */}
-                <div className="w-full h-48 sm:h-56 md:h-60 lg:h-48 overflow-hidden rounded-lg">
-                  <img
-                    src={s.img}
-                    alt={s.alt}
-                    className="w-full h-full object-cover transform hover:scale-105 transition duration-300"
-                  />
-                </div>
+        {/* Carousel Wrapper */}
+        <div className="relative overflow-hidden">
+          <div
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {services.map((s) => (
+              <div
+                key={s.id}
+                className="min-w-full sm:min-w-1/2 md:min-w-1/3 px-3"
+              >
+                <article className="flex flex-col bg-white rounded-xl shadow-md hover:shadow-lg transition p-5 h-full">
+                  {/* Image */}
+                  <div className="w-full h-48 sm:h-56 md:h-60 lg:h-48 overflow-hidden rounded-lg">
+                    <img
+                      src={s.img}
+                      alt={s.alt}
+                      className="w-full h-full object-cover transform hover:scale-105 transition duration-300"
+                    />
+                  </div>
 
-                {/* Content */}
-                <div className="flex flex-col flex-grow mt-5">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-gray-600 text-sm leading-relaxed flex-grow">
-                    {s.description}
-                  </p>
-                  <a
-                    href={s.link}
-                    className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-medium text-sm"
-                    aria-label={`Show more about ${s.title}`}
-                  >
-                    Show Now →
-                  </a>
-                </div>
-              </article>
-            </div>
+                  {/* Content */}
+                  <div className="flex flex-col flex-grow mt-5">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
+                      {s.title}
+                    </h3>
+                    <p className="mt-3 text-gray-600 text-sm leading-relaxed flex-grow">
+                      {s.description}
+                    </p>
+                    <a
+                      href={s.link}
+                      className="mt-4 inline-block text-blue-600 hover:text-blue-800 font-medium text-sm"
+                    >
+                      Show Now →
+                    </a>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute top-1/2 left-3 -translate-y-1/2 bg-white rounded-full shadow p-2 hover:bg-gray-100"
+          >
+            ◀
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute top-1/2 right-3 -translate-y-1/2 bg-white rounded-full shadow p-2 hover:bg-gray-100"
+          >
+            ▶
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-center mt-6 space-x-2">
+          {services.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrent(idx)}
+              className={`h-2 w-2 rounded-full ${
+                idx === current ? "bg-blue-600" : "bg-gray-300"
+              }`}
+            />
           ))}
-        </Slider>
+        </div>
       </div>
     </section>
   );
