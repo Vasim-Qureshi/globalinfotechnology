@@ -17,18 +17,18 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8 text-gray-700 font-medium">
           <li>
-            <a href="/" className="hover:text-blue-600">
+            <a href="#" className="block hover:text-blue-600">
               Home
             </a>
           </li>
           <li>
-            <a href="#features" className="hover:text-blue-600">
-              Features
+            <a href="#services" className="block hover:text-blue-600">
+              Services
             </a>
           </li>
           <li>
-            <a href="#templates" className="hover:text-blue-600">
-              Templates
+            <a href="#projects" className="block hover:text-blue-600">
+              Projects
             </a>
           </li>
           <li>
@@ -44,6 +44,11 @@ const Navbar = () => {
           <li>
             <a href="#partner" className="block hover:text-blue-600">
               Partner
+            </a>
+          </li>
+          <li>
+            <a href="#about" className="block hover:text-blue-600">
+              AboutUs
             </a>
           </li>
           <li>
@@ -67,18 +72,18 @@ const Navbar = () => {
         <div className="md:hidden bg-white shadow-md px-6 py-4">
           <ul className="space-y-4 text-gray-700 font-medium">
             <li>
-              <a href="/" className="block hover:text-blue-600">
+              <a href="#" className="block hover:text-blue-600">
                 Home
               </a>
             </li>
             <li>
-              <a href="#features" className="block hover:text-blue-600">
-                Features
+              <a href="#services" className="block hover:text-blue-600">
+                Services
               </a>
             </li>
             <li>
-              <a href="#templates" className="block hover:text-blue-600">
-                Templates
+              <a href="#projects" className="block hover:text-blue-600">
+                Projects
               </a>
             </li>
             <li>
@@ -94,6 +99,11 @@ const Navbar = () => {
             <li>
               <a href="#partner" className="block hover:text-blue-600">
                 Partner
+              </a>
+            </li>
+            <li>
+              <a href="#about" className="block hover:text-blue-600">
+                AboutUs
               </a>
             </li>
             <li>

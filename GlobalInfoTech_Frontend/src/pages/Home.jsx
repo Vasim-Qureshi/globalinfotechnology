@@ -24,10 +24,10 @@ const Home = () => {
       </section>
 
       {/* Sections */}
-      <section id="section1" className="py-12">
+      <section id="about" className="py-12">
         <LearnAbout />
       </section>
-      <section id="section2" className="py-12 bg-white">
+      <section id="services" className="py-12 bg-white">
         <Services />
       </section>
       {/* <section id="section3" className="py-12"> */}
@@ -41,11 +41,11 @@ const Home = () => {
         <ProjectSection />
       </section>
       {/* Reviews Section */}
-      <section id="reviews" className="py-12 bg-white">
+      <section id="blog" className="py-12 bg-white">
         <ReviewsSection />
       </section>
       {/* Team Section */}
-      <section id="team" className="py-12">
+      <section id="support" className="py-12">
         <TeamSection />
       </section>
 
